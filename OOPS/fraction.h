@@ -12,7 +12,7 @@ class Fraction {
         this -> denominator = denominator;
     }
 
-    void print() {
+    void print() const {
         cout << this -> numerator << " / " << denominator << '\n';
     }
 
@@ -28,23 +28,44 @@ class Fraction {
         denominator /= gcd;
     }
 
-    void add(Fraction const &f2) {
-        int lcm = denominator * f2.denominator;
+    Fraction add(Fraction const &f) const {
+        int lcm = denominator * f.denominator;
         int x = lcm / denominator;
-        int y = lcm / f2.denominator;
+        int y = lcm / f.denominator;
 
-        int num = x * numerator + (y * f2.numerator);
+        int num = x * numerator + (y * f.numerator);
 
-        numerator = num;
-        denominator = lcm;
+        Fraction sum(num, lcm);
+        sum.simplify();
+        return sum;
+    }
+    
+    Fraction operator+(Fraction const &f) const {
+        int lcm = denominator * f.denominator;
+        int x = lcm / denominator;
+        int y = lcm / f.denominator;
 
-        simplify();
+        int num = x * numerator + (y * f.numerator);
+
+        Fraction sum(num, lcm);
+        sum.simplify();
+        return sum;
     }
 
-    void multiply(Fraction const &f2) {
-        numerator *= f2.numerator;
-        denominator *= f2.denominator;
-
-        simplify();
+    Fraction multiply(Fraction const &f) const {
+        Fraction product(numerator * f.numerator, denominator * f.denominator);
+        product.simplify();
+        return product;
     }
+
+    Fraction operator*(Fraction const &f) const {
+        Fraction product(numerator * f.numerator, denominator * f.denominator);
+        product.simplify();
+        return product;
+    }
+
+    bool operator==(Fraction const &f) const {
+        return numerator == f.numerator && denominator == f.denominator;
+    }
+
 };
