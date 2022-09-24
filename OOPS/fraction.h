@@ -68,4 +68,9 @@ class Fraction {
         return numerator == f.numerator && denominator == f.denominator;
     }
 
+    Fraction& operator++() {
+        numerator += denominator;
+        simplify();
+        return *this;
+    }
 };
