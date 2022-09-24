@@ -68,4 +68,32 @@ class Fraction {
         return numerator == f.numerator && denominator == f.denominator;
     }
 
+    // Pre Increment
+    Fraction& operator++() {
+        numerator += denominator;
+        simplify();
+        return *this;
+    }
+
+    // Post Increment
+    Fraction operator++(int) {
+        Fraction save(numerator, denominator);
+        numerator += denominator;
+        simplify();
+        save.simplify();
+        return save;
+    }
+
+    Fraction& operator+=(Fraction const &f) {
+        int lcm = denominator * f.denominator;
+        int x = lcm / denominator;
+        int y = lcm / f.denominator;
+
+        int num = x * numerator + (y * f.numerator);
+
+        numerator = num;
+        denominator = lcm;
+        simplify();
+        return *this;
+    }
 };
