@@ -42,6 +42,30 @@ Node* takeInput_better() {
     return head;
 }
 
+Node* insertNode(Node *head, int i, int data) {
+    if (head == NULL) {
+        return head;
+    }
+    if (i == 0) {
+        Node *newNode = new Node(data);
+        newNode -> next = head;
+        return newNode;
+    }
+    Node *temp = head;
+    int count = 0;
+    while (temp != NULL && count < i - 1) {
+        temp = temp -> next;
+        count++;
+    }
+    if (temp == NULL) {
+        return head;
+    }
+    Node *newNode = new Node(data);
+    newNode -> next = temp -> next;
+    temp -> next = newNode;
+    return head;
+}
+
 void printLL(Node *head) {
     while (head != NULL) {
         std::cout << head -> data << ' ';
