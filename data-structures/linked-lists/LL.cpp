@@ -5,6 +5,6 @@ using namespace std;
 
 
 int main() {
-    Node *head = takeInput();
+    Node *head = takeInput_better();
     printLL(head);
 }
