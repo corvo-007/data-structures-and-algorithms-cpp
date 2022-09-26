@@ -1,39 +1,36 @@
-#include <iostream>
 #include <climits>
 
+template <typename T>
 class Stack {
-    int *data;
+    T *data;
     int nextIndex;
     int capacity;
 
     public:
 
     Stack(int totalSize) {
-        data = new int[totalSize];
+        data = new T[totalSize];
         nextIndex = 0;
         capacity = totalSize;
     }
 
-    void push(int element) {
+    void push(T element) {
         if (nextIndex == capacity) {
-            std::cout << "Stack is full\n";
             return ;
         }
         data[nextIndex++] = element;
     }
 
-    int pop() {
+    T pop() {
         if (nextIndex == 0) {
-            std:: cout << "Stack is empty\n";
-            return INT_MIN;
+            return 0;
         }
         return data[--nextIndex];
     }
 
-    int top() {
+    T top() {
         if (nextIndex == 0) {
-            std::cout << "Stack is empty\n";
-            return INT_MIN;
+            return 0;
         }
         return data[nextIndex - 1];
     }
