@@ -66,6 +66,30 @@ Node* insertNode(Node *head, int i, int data) {
     return head;
 }
 
+Node* deleteNode(Node *head, int index) {
+    if (head == NULL) {
+        return NULL;
+    }
+    if (index == 0) {
+        Node *newHead = head -> next;
+        delete head;
+        return newHead;
+    }
+    int count = 0;
+    Node *temp = head;
+    while (temp != NULL && count < index - 1) {
+        count++;
+        temp = temp -> next;
+    }
+    if (temp == NULL || temp -> next == NULL) {
+        return head;
+    }
+    Node *delNode = temp -> next;
+    temp -> next = delNode -> next;
+    delete delNode;
+    return head;
+}
+
 void printLL(Node *head) {
     while (head != NULL) {
         std::cout << head -> data << ' ';

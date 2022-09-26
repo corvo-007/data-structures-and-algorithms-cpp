@@ -11,4 +11,6 @@ int main() {
     cin >> index >> data;
     head = insertNode(head, index, data);
     printLL(head);
+    head = deleteNode(head, index);
+    printLL(head);
 }
