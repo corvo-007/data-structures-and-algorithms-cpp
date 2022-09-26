@@ -16,7 +16,13 @@ class Stack {
 
     void push(T element) {
         if (nextIndex == capacity) {
-            return ;
+            T *temp = data;
+            data = new T[2 * capacity];
+            for (int i = 0; i < capacity; i++) {
+                data[i] = temp[i];
+            }
+            delete [] temp;
+            capacity *= 2;
         }
         data[nextIndex++] = element;
     }
