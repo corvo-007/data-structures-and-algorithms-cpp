@@ -1,10 +1,11 @@
+template <typename T>
 class Node {
     public:
-    int data;
-    Node *next;
+    T data;
+    Node<T> *next;
 
-    Node(int data) {
+    Node(T data) {
         this -> data = data;
-        next = nullptr;
+        next = NULL;
     }
 };
