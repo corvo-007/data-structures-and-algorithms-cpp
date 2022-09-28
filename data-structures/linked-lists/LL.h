@@ -1,5 +1,16 @@
 #include <iostream>
-#include "../../common/node.h"
+// #include "../../common/node.h"
+
+class Node {
+    public:
+    int data;
+    Node *next;
+
+    Node(int data) {
+        this -> data = data;
+        next = NULL;
+    }
+};
 
 Node* takeInput() {
     Node *head = NULL;
