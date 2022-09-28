@@ -1,8 +1,8 @@
 #include <iostream>
+#include "queue.h"
 
 using namespace std;
 
-#include "queue.h"
 
 int main() {
     Queue<int> queue(5);
