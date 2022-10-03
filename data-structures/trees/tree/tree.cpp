@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    TreeNode<int> *root = takeInputRecursive();
+    TreeNode<int> *root = takeInputLevelWise();
 
     printTreeRecursive(root);
 }
