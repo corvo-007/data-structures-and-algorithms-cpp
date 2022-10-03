@@ -1,6 +1,23 @@
 #include <iostream>
 #include "../../../common/treeNode.h"
 
+TreeNode<int>* takeInputRecursive() {
+    int data;
+    std::cout << "Enter data: ";
+    std::cin >> data;
+
+    TreeNode<int> *root = new TreeNode<int>(data);
+
+    int n;
+    std::cout << "Enter number of children: ";
+    std::cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        root -> children.push_back(takeInputRecursive());
+    }
+    return root;
+}
+
 void printTreeRecursive(TreeNode<int> *root) {
     std::cout << root -> data << ": ";
     for (int i = 0; i < root -> children.size(); i++) {
