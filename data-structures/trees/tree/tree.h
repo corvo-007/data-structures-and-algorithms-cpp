@@ -19,6 +19,9 @@ TreeNode<int>* takeInputRecursive() {
 }
 
 void printTreeRecursive(TreeNode<int> *root) {
+    if (root == NULL) {
+        return ;
+    }
     std::cout << root -> data << ": ";
     for (int i = 0; i < root -> children.size(); i++) {
         if (i == root -> children.size() - 1) {
