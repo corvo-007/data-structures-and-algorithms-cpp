@@ -46,6 +46,17 @@ TreeNode<int>* takeInputLevelWise() {
     return root;
 }
 
+int numNodes(TreeNode<int> *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    int num = 1;
+    for (int i = 0; i < root -> children.size(); i++) {
+        num += numNodes(root -> children[i]);
+    }
+    return num;
+}
+
 void printTreeRecursive(TreeNode<int> *root) {
     if (root == NULL) {
         return ;
@@ -62,5 +73,28 @@ void printTreeRecursive(TreeNode<int> *root) {
 
     for (int i = 0; i < root -> children.size(); i++) {
         printTreeRecursive(root -> children[i]);
+    }
+}
+
+void printTreeLevelWise(TreeNode<int> *root) {
+    if (root == NULL) {
+        return ;
+    }
+    Queue<TreeNode<int>*> queue;
+    queue.push(root);
+
+    while (!queue.isEmpty()) {
+        TreeNode<int> *front = queue.pop();
+
+        std::cout << front -> data << ": ";
+        for (int i = 0; i < front -> children.size(); i++) {
+            queue.push(front -> children[i]);
+            if (i == front -> children.size() - 1) {
+                std::cout << front -> children[i] -> data;
+                break;
+            }
+            std::cout << front -> children[i] -> data << ", ";
+        }
+        std::cout << '\n';
     }
 }

@@ -5,6 +5,7 @@ using namespace std;
 
 int main() {
     TreeNode<int> *root = takeInputLevelWise();
+    printTreeLevelWise(root);
 
-    printTreeRecursive(root);
+    cout << "number of nodes: " << numNodes(root);
 }
