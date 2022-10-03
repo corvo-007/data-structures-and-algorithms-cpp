@@ -57,6 +57,46 @@ int numNodes(TreeNode<int> *root) {
     return num;
 }
 
+int sumOfTree(TreeNode<int> *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    int sum = root -> data;
+    for (int i = 0; i < root -> children.size(); i++) {
+        sum += sumOfTree(root -> children[i]);
+    }
+    return sum;
+}
+
+TreeNode<int>* maxTreeNode(TreeNode<int> *root) {
+    if (root == NULL) {
+        return NULL;
+    }
+    TreeNode<int> *maxNode = root;
+    for (int i = 0; i < root -> children.size(); i++) {
+        TreeNode<int> *maxInSubTree = maxTreeNode(root -> children[i]);
+        if (maxInSubTree -> data > maxNode -> data) {
+            maxNode = maxInSubTree;
+        }
+    }
+    return maxNode;
+}
+
+int height(TreeNode<int> *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    int maxHeight = 0;
+
+    for (int i = 0; i < root -> children.size(); i++) {
+        int h = height(root -> children[i]);
+        if (h > maxHeight) {
+            maxHeight = h;
+        }
+    }
+    return maxHeight + 1;
+}
+
 void printTreeRecursive(TreeNode<int> *root) {
     if (root == NULL) {
         return ;
