@@ -47,6 +47,13 @@ BinaryTreeNode<int>* takeInputLevelWise() {
     return root;
 }
 
+int numOfNodes(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    return 1 + numOfNodes(root -> left) + numOfNodes(root -> right);
+}
+
 void printBinaryTreeRecursive(BinaryTreeNode<int> *root) {
     if (root == NULL) {
         return ;
