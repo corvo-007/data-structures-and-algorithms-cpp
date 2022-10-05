@@ -104,3 +104,21 @@ void printBinaryTreeLevelWise(BinaryTreeNode<int> *root) {
         std::cout << '\n';
     }
 }
+
+void printPreOrder(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return ;
+    }
+    std::cout << root -> data << ' ';
+    printPreOrder(root -> left);
+    printPreOrder(root -> right);
+}
+
+void printPostOrder(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return ;
+    }
+    printPostOrder(root -> left);
+    printPostOrder(root -> right);
+    std::cout << root -> data << ' ';
+}

@@ -13,4 +13,10 @@ int main() {
     cout << "Height of the binary tree: " << height(root) << '\n';
 
     printBinaryTreeLevelWise(root);
+
+    printPreOrder(root);
+    cout << '\n';
+
+    printPostOrder(root);
+    cout << '\n';
 }
