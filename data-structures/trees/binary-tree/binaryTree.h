@@ -54,6 +54,14 @@ int numOfNodes(BinaryTreeNode<int> *root) {
     return 1 + numOfNodes(root -> left) + numOfNodes(root -> right);
 }
 
+bool findNode(BinaryTreeNode<int> *root, int data) {
+    return (root == NULL) ? false : (root -> data == data) ? true : (findNode(root -> left, data)) ? true : findNode(root -> right, data);
+}
+
+int height(BinaryTreeNode<int> *root) {
+    return (root == NULL) ? 0 : 1 + std::max(height(root -> left), height(root -> right));
+}
+
 void printBinaryTreeRecursive(BinaryTreeNode<int> *root) {
     if (root == NULL) {
         return ;
