@@ -48,10 +48,7 @@ BinaryTreeNode<int>* takeInputLevelWise() {
 }
 
 int numOfNodes(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
-        return 0;
-    }
-    return 1 + numOfNodes(root -> left) + numOfNodes(root -> right);
+    return (root == NULL) ? 0 : 1 + numOfNodes(root -> left) + numOfNodes(root -> right);
 }
 
 bool findNode(BinaryTreeNode<int> *root, int data) {
