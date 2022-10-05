@@ -19,4 +19,6 @@ int main() {
 
     printPostOrder(root);
     cout << '\n';
+
+    cout << "Sum of binary tree: " << sumOfBinaryTree(root) << '\n';
 }

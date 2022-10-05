@@ -59,6 +59,10 @@ int height(BinaryTreeNode<int> *root) {
     return (root == NULL) ? 0 : 1 + std::max(height(root -> left), height(root -> right));
 }
 
+int sumOfBinaryTree(BinaryTreeNode<int> *root) {
+    return (root == NULL) ? 0 : root -> data + sumOfBinaryTree(root -> left) + sumOfBinaryTree(root -> right);
+}
+
 void printBinaryTreeRecursive(BinaryTreeNode<int> *root) {
     if (root == NULL) {
         return ;
