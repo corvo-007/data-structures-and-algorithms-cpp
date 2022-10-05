@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "../../../common/binaryTreeNode.h"
 #include "../../queue/queue-using-LL/queue.h"
 
@@ -118,6 +119,27 @@ void printPreOrder(BinaryTreeNode<int> *root) {
     printPreOrder(root -> right);
 }
 
+std::vector<int>* preOrderVector(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return NULL;
+    }
+    std::vector<int> *ans = new std::vector<int>();
+    ans -> push_back(root -> data);
+    std::vector<int> *left = preOrderVector(root -> left);
+    if (left != NULL) {
+        for (int i = 0; i < left -> size(); i++) {
+            ans -> push_back(left -> at(i));
+        }
+    }
+    std::vector<int> *right = preOrderVector(root -> right);
+    if (right != NULL) {
+        for (int i = 0; i < right -> size(); i++) {
+            ans -> push_back(right -> at(i));
+        }
+    }
+    return ans;
+}
+
 void printPostOrder(BinaryTreeNode<int> *root) {
     if (root == NULL) {
         return ;
@@ -125,4 +147,23 @@ void printPostOrder(BinaryTreeNode<int> *root) {
     printPostOrder(root -> left);
     printPostOrder(root -> right);
     std::cout << root -> data << ' ';
+}
+
+std::vector<int>* postOrderVector(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return NULL;
+    }
+    std::vector<int> *ans = postOrderVector(root -> left);
+    std::vector<int> *right = postOrderVector(root -> right);
+
+    if (ans == NULL) {
+        ans = new std::vector<int>();
+    }
+    if (right != NULL) {
+        for (int i = 0; i < right -> size(); i++) {
+            ans -> push_back(right -> at(i));
+        }
+    }
+    ans -> push_back(root -> data);
+    return ans;
 }
