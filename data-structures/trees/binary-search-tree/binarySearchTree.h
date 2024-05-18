@@ -81,8 +81,7 @@ bool isBST_optimised2_helper(BinaryTreeNode<int> *root, int min, int max) {
     if (root -> data < min || root -> data > max) {
         return false;
     }
-    bool isLeftBST = isBST_optimised2_helper(root -> left, min, root -> data - 1);
-    return isLeftBST && isBST_optimised2_helper(root -> right, root -> data, max);
+    return isBST_optimised2_helper(root -> left, min, root -> data - 1) && isBST_optimised2_helper(root -> right, root -> data, max);
 }
 
 bool isBST_optimised2(BinaryTreeNode<int> *root) {
