@@ -6,6 +6,6 @@ class Node {
 
     Node(T data) {
         this -> data = data;
-        next = NULL;
+        next = nullptr;
     }
 };

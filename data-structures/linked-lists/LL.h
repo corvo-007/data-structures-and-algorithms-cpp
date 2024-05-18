@@ -8,22 +8,22 @@ class Node {
 
     Node(int data) {
         this -> data = data;
-        next = NULL;
+        next = nullptr;
     }
 };
 
 Node* takeInput() {
-    Node *head = NULL;
+    Node *head = nullptr;
     int data;
     std::cout << "Enter the elements in Linked List (Enter -1 to stop):\n";
     std::cin >> data;
     while (data != -1) {
-        if (head == NULL) {
+        if (head == nullptr) {
             head = new Node(data);
         }
         else {
             Node *temp = head;
-            while (temp -> next != NULL) {
+            while (temp -> next != nullptr) {
                 temp = temp -> next;
             }
             temp -> next = new Node(data);
@@ -34,13 +34,13 @@ Node* takeInput() {
 }
 
 Node* takeInput_better() {
-    Node *head = NULL, *tail = NULL;
+    Node *head = nullptr, *tail = nullptr;
     int data;
     std::cout << "Enter the elements in Linked List (Enter -1 to stop):\n";
     std::cin >> data;
 
     while (data != -1) {
-        if (head == NULL) {
+        if (head == nullptr) {
             head = new Node(data);
             tail = head;
         }
@@ -54,7 +54,7 @@ Node* takeInput_better() {
 }
 
 Node* insertNode(Node *head, int i, int data) {
-    if (head == NULL) {
+    if (head == nullptr) {
         return head;
     }
     if (i == 0) {
@@ -64,11 +64,11 @@ Node* insertNode(Node *head, int i, int data) {
     }
     Node *temp = head;
     int count = 0;
-    while (temp != NULL && count < i - 1) {
+    while (temp != nullptr && count < i - 1) {
         temp = temp -> next;
         count++;
     }
-    if (temp == NULL) {
+    if (temp == nullptr) {
         return head;
     }
     Node *newNode = new Node(data);
@@ -78,8 +78,8 @@ Node* insertNode(Node *head, int i, int data) {
 }
 
 Node* deleteNode(Node *head, int index) {
-    if (head == NULL) {
-        return NULL;
+    if (head == nullptr) {
+        return nullptr;
     }
     if (index == 0) {
         Node *newHead = head -> next;
@@ -88,11 +88,11 @@ Node* deleteNode(Node *head, int index) {
     }
     int count = 0;
     Node *temp = head;
-    while (temp != NULL && count < index - 1) {
+    while (temp != nullptr && count < index - 1) {
         count++;
         temp = temp -> next;
     }
-    if (temp == NULL || temp -> next == NULL) {
+    if (temp == nullptr || temp -> next == nullptr) {
         return head;
     }
     Node *delNode = temp -> next;
@@ -102,7 +102,7 @@ Node* deleteNode(Node *head, int index) {
 }
 
 void printLL(Node *head) {
-    while (head != NULL) {
+    while (head != nullptr) {
         std::cout << head -> data << ' ';
         head = head -> next;
     }

@@ -8,7 +8,7 @@ BinaryTreeNode<int>* takeInputRecursive() {
     std::cout << "Enter data (-1 to put NULL): ";
     std::cin >> data;
     if (data == -1) {
-        return NULL;
+        return nullptr;
     }
 
     BinaryTreeNode<int> *root = new BinaryTreeNode<int>(data);
@@ -22,7 +22,7 @@ BinaryTreeNode<int>* takeInputLevelWise() {
     std::cout << "Enter data: ";
     std::cin >> data;
     if (data == -1) {
-        return NULL;
+        return nullptr;
     }
     BinaryTreeNode<int> *root = new BinaryTreeNode<int>(data);
     Queue<BinaryTreeNode<int>*> queue;
@@ -49,23 +49,23 @@ BinaryTreeNode<int>* takeInputLevelWise() {
 }
 
 int numOfNodes(BinaryTreeNode<int> *root) {
-    return (root == NULL) ? 0 : 1 + numOfNodes(root -> left) + numOfNodes(root -> right);
+    return (root == nullptr) ? 0 : 1 + numOfNodes(root -> left) + numOfNodes(root -> right);
 }
 
 bool findNode(BinaryTreeNode<int> *root, int data) {
-    return (root == NULL) ? false : (root -> data == data) ? true : (findNode(root -> left, data)) ? true : findNode(root -> right, data);
+    return (root == nullptr) ? false : (root -> data == data) ? true : (findNode(root -> left, data)) ? true : findNode(root -> right, data);
 }
 
 int height(BinaryTreeNode<int> *root) {
-    return (root == NULL) ? 0 : 1 + std::max(height(root -> left), height(root -> right));
+    return (root == nullptr) ? 0 : 1 + std::max(height(root -> left), height(root -> right));
 }
 
 int sumOfBinaryTree(BinaryTreeNode<int> *root) {
-    return (root == NULL) ? 0 : root -> data + sumOfBinaryTree(root -> left) + sumOfBinaryTree(root -> right);
+    return (root == nullptr) ? 0 : root -> data + sumOfBinaryTree(root -> left) + sumOfBinaryTree(root -> right);
 }
 
 void printBinaryTreeRecursive(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return ;
     }
     std::cout << root -> data << ": ";
@@ -84,7 +84,7 @@ void printBinaryTreeRecursive(BinaryTreeNode<int> *root) {
 }
 
 void printBinaryTreeLevelWise(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return ;
     }
     Queue<BinaryTreeNode<int>*> queue;
@@ -111,7 +111,7 @@ void printBinaryTreeLevelWise(BinaryTreeNode<int> *root) {
 }
 
 void printPreOrder(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return ;
     }
     std::cout << root -> data << ' ';
@@ -120,19 +120,19 @@ void printPreOrder(BinaryTreeNode<int> *root) {
 }
 
 std::vector<int>* preOrderVector(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
-        return NULL;
+    if (root == nullptr) {
+        return nullptr;
     }
     std::vector<int> *ans = new std::vector<int>();
     ans -> push_back(root -> data);
     std::vector<int> *left = preOrderVector(root -> left);
-    if (left != NULL) {
+    if (left != nullptr) {
         for (int i = 0; i < left -> size(); i++) {
             ans -> push_back(left -> at(i));
         }
     }
     std::vector<int> *right = preOrderVector(root -> right);
-    if (right != NULL) {
+    if (right != nullptr) {
         for (int i = 0; i < right -> size(); i++) {
             ans -> push_back(right -> at(i));
         }
@@ -141,7 +141,7 @@ std::vector<int>* preOrderVector(BinaryTreeNode<int> *root) {
 }
 
 void printPostOrder(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return ;
     }
     printPostOrder(root -> left);
@@ -150,16 +150,16 @@ void printPostOrder(BinaryTreeNode<int> *root) {
 }
 
 std::vector<int>* postOrderVector(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
-        return NULL;
+    if (root == nullptr) {
+        return nullptr;
     }
     std::vector<int> *ans = postOrderVector(root -> left);
     std::vector<int> *right = postOrderVector(root -> right);
 
-    if (ans == NULL) {
+    if (ans == nullptr) {
         ans = new std::vector<int>();
     }
-    if (right != NULL) {
+    if (right != nullptr) {
         for (int i = 0; i < right -> size(); i++) {
             ans -> push_back(right -> at(i));
         }

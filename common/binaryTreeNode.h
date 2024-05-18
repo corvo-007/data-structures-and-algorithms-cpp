@@ -7,8 +7,8 @@ class BinaryTreeNode {
 
     BinaryTreeNode(T data) {
         this -> data = data;
-        left = NULL;
-        right = NULL;
+        left = nullptr;
+        right = nullptr;
     }
 
     ~BinaryTreeNode() {

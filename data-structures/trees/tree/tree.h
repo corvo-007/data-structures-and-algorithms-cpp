@@ -47,7 +47,7 @@ TreeNode<int>* takeInputLevelWise() {
 }
 
 int numNodes(TreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return 0;
     }
     int num = 1;
@@ -58,7 +58,7 @@ int numNodes(TreeNode<int> *root) {
 }
 
 int sumOfTree(TreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return 0;
     }
     int sum = root -> data;
@@ -69,8 +69,8 @@ int sumOfTree(TreeNode<int> *root) {
 }
 
 TreeNode<int>* maxTreeNode(TreeNode<int> *root) {
-    if (root == NULL) {
-        return NULL;
+    if (root == nullptr) {
+        return nullptr;
     }
     TreeNode<int> *maxNode = root;
     for (int i = 0; i < root -> children.size(); i++) {
@@ -83,7 +83,7 @@ TreeNode<int>* maxTreeNode(TreeNode<int> *root) {
 }
 
 int height(TreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return 0;
     }
     int maxHeight = 0;
@@ -98,7 +98,7 @@ int height(TreeNode<int> *root) {
 }
 
 void printTreeRecursive(TreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return ;
     }
     std::cout << root -> data << ": ";
@@ -117,7 +117,7 @@ void printTreeRecursive(TreeNode<int> *root) {
 }
 
 void printTreeLevelWise(TreeNode<int> *root) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return ;
     }
     Queue<TreeNode<int>*> queue;

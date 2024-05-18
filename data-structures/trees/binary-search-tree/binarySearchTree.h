@@ -4,7 +4,7 @@
 #include "../../../common/node.h"
 
 bool searchInBST(BinaryTreeNode<int> *root, int searchValue) {
-    if (root == NULL) {
+    if (root == nullptr) {
         return false;
     }
     if (root -> data == searchValue) {

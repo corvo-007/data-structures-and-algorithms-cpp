@@ -9,13 +9,13 @@ class Queue {
     public:
 
     Queue() {
-        head = NULL;
-        tail = NULL;
+        head = nullptr;
+        tail = nullptr;
         _size = 0;
     }
 
     void push(T data) {
-        if (head == NULL) {
+        if (head == nullptr) {
             head = new Node<T>(data);
             tail = head;
         }
@@ -27,22 +27,22 @@ class Queue {
     }
 
     T pop() {
-        if (head == NULL) {
+        if (head == nullptr) {
             return 0;
         }
         T data = head -> data;
         Node<T> *temp = head;
         head = head -> next;
         delete temp;
-        if (head == NULL) {
-            tail = NULL;
+        if (head == nullptr) {
+            tail = nullptr;
         }
         _size--;
         return data;
     }
 
     T front() const {
-        if (head == NULL) {
+        if (head == nullptr) {
             return 0;
         }
         return head -> data;

@@ -8,12 +8,12 @@ class Stack {
     public:
 
     Stack() {
-        head = NULL;
+        head = nullptr;
         _size = 0;
     }
 
     void push(T data) {
-        if (head == NULL) {
+        if (head == nullptr) {
             head = new Node<T>(data);
         }
         else {
@@ -25,7 +25,7 @@ class Stack {
     }
 
     T pop() {
-        if (head == NULL) {
+        if (head == nullptr) {
             return 0;
         }
         T data = head -> data;
@@ -37,7 +37,7 @@ class Stack {
     }
 
     T top() {
-        if (head == NULL) {
+        if (head == nullptr) {
             return 0;
         }
         return head -> data;
