@@ -167,3 +167,26 @@ std::vector<int>* postOrderVector(BinaryTreeNode<int> *root) {
     ans -> push_back(root -> data);
     return ans;
 }
+
+BinaryTreeNode<int>* getLCANode(BinaryTreeNode<int>* const root, int d1, int d2) {
+    if (root == nullptr) {
+        return root;
+    }
+
+    if (root -> data == d1 || root -> data == d2) {
+        return root;
+    }
+
+    auto left = getLCANode(root -> left, d1, d2);
+    auto right = getLCANode(root -> right, d1, d2);
+
+    return (left && right) ? root : (left) ? left : right;
+}
+
+int getLCA(BinaryTreeNode<int>* const root, int d1, int d2) {
+    if (root == nullptr) {
+        return -1;
+    }
+    auto node = getLCANode(root, d1, d2);
+    return (node) ? node -> data : -1;
+}
