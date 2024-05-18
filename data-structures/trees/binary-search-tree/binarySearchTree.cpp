@@ -1,8 +1,6 @@
 #include <iostream>
 #include "binarySearchTree.h"
 
-using namespace std;
-
 int main() {
     BinaryTreeNode<int> *root = new BinaryTreeNode<int>(4);
     root -> left = new BinaryTreeNode<int>(2);
@@ -12,8 +10,37 @@ int main() {
     root -> right -> left = new BinaryTreeNode<int>(5);
     root -> right -> right = new BinaryTreeNode<int>(7);
 
-    cout << searchInBST(root, 3) << '\n';
-    cout << searchInBST(root, 5) << '\n';
-    cout << searchInBST(root, 0) << '\n';
-    cout << searchInBST(root, 8) << '\n';
+    std::cout << searchInBST(root, 3) << '\n';
+    std::cout << searchInBST(root, 5) << '\n';
+    std::cout << searchInBST(root, 0) << '\n';
+    std::cout << searchInBST(root, 8) << '\n';
+
+    printInRange(root, 1, 2);
+    std::cout << '\n';
+
+    std::cout << isBST(root) << '\n';
+
+
+    Node<int> *head = constructLinkedListFromBST_optimised(root);
+
+    while (head != nullptr) {
+        std::cout << head -> data << "->";
+        head = head -> next;
+    }
+    std::cout << '\n';
+
+    std::vector<int> *path = getPath(root, 3);
+
+    auto it = path -> begin();
+
+    while (it != path -> end()) {
+        std::cout << *it << ' ';
+        ++it;
+    }
+    std::cout << '\n';
+
+    delete root;
+    delete head;
+    delete path;
+
 }
