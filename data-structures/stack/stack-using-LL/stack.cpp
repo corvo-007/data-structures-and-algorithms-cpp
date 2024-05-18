@@ -1,8 +1,6 @@
 #include <iostream>
 #include "stack.h"
 
-using namespace std;
-
 int main() {
     Stack<int> stack;
     stack.push(10);
@@ -11,23 +9,23 @@ int main() {
     stack.push(40);
     stack.push(50);
 
-    cout << stack.isEmpty() << '\n';
-    cout << stack.size() << '\n';
+    std::cout << stack.isEmpty() << '\n';
+    std::cout << stack.size() << '\n';
 
-    cout << stack.pop() << '\n';
-    cout << stack.pop() << '\n';
-    cout << stack.pop() << '\n';
-    cout << stack.pop() << '\n';
+    std::cout << stack.pop() << '\n';
+    std::cout << stack.pop() << '\n';
+    std::cout << stack.pop() << '\n';
+    std::cout << stack.pop() << '\n';
 
-    cout << stack.isEmpty() << '\n';
-    cout << stack.size() << '\n';
+    std::cout << stack.isEmpty() << '\n';
+    std::cout << stack.size() << '\n';
 
-    cout << stack.top() << '\n';
+    std::cout << stack.top() << '\n';
     stack.push(100);
-    cout << stack.top() << '\n';
+    std::cout << stack.top() << '\n';
 
-    cout << stack.pop() << '\n';
+    std::cout << stack.pop() << '\n';
 
-    cout << stack.isEmpty() << '\n';
-    cout << stack.size() << '\n';
+    std::cout << stack.isEmpty() << '\n';
+    std::cout << stack.size() << '\n';
 }

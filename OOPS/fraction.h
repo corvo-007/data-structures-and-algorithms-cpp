@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 class Fraction {
     int numerator;
@@ -13,12 +12,12 @@ class Fraction {
     }
 
     void print() const {
-        cout << this -> numerator << " / " << denominator << '\n';
+        std::cout << this->numerator << " / " << denominator << '\n';
     }
 
     void simplify() {
         int gcd = 1;
-        int j = min(numerator, denominator);
+        int j = std::min(numerator, denominator);
         for (int i = 1; i <= j; i++) {
             if (numerator % i == 0 && denominator % i == 0) {
                 gcd = i;

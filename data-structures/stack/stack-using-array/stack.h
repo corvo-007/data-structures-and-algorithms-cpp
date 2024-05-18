@@ -1,5 +1,3 @@
-#include <climits>
-
 template <typename T>
 class Stack {
     T *data;

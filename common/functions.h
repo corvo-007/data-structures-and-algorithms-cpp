@@ -1,10 +1,8 @@
 #include <iostream>
 
-using namespace std;
-
 void print_array(int *arr, int n) {
     for (int i = 0; i < n; i++) {
-        cout << arr[i] << ' ';
+        std::cout << arr[i] << ' ';
     }
-    cout << '\n';
+    std::cout << '\n';
 }

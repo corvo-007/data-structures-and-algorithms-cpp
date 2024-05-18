@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 class DynamicArray {
     int *data;
@@ -66,9 +65,9 @@ class DynamicArray {
 
     void print() const {
         for (int i = 0; i < nextIndex; i++) {
-            cout << data[i] << ' ';
+            std::cout << data[i] << ' ';
         }
-        cout << '\n';
+        std::cout << '\n';
     }
 
     ~DynamicArray() {

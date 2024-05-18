@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 class ComplexNumber {
     int real;
@@ -24,6 +23,6 @@ class ComplexNumber {
     }
 
     void print() {
-        cout << real << " + i" << imaginary << '\n';
+        std::cout << real << " + i" << imaginary << '\n';
     }
 };

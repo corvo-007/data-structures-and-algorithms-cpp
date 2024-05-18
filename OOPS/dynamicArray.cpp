@@ -1,8 +1,6 @@
 #include <iostream>
 #include "dynamicArray.h"
 
-using namespace std;
-
 int main() {
     DynamicArray arr;
 

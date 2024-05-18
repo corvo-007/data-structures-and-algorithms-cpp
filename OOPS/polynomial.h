@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 class Polynomial {
     int *degCoeff;
@@ -54,7 +53,7 @@ class Polynomial {
                 }
             }
         }
-        int s = min(size, p.size);
+        int s = std::min(size, p.size);
         for (int i = 0; i < s; i++) {
             if (degCoeff[i] != p.degCoeff[i]) {
                 return false;
@@ -143,9 +142,9 @@ class Polynomial {
     void print() const {
         for (int i = 0; i < size; i++) {
             if (degCoeff[i] != 0) {
-                cout << degCoeff[i] << 'x' << i << ' ';
+                std::cout << degCoeff[i] << 'x' << i << ' ';
             }
         }
-        cout << '\n';
+        std::cout << '\n';
     }
 };

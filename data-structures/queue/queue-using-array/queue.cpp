@@ -1,14 +1,11 @@
 #include <iostream>
 #include "queue.h"
 
-using namespace std;
-
-
 int main() {
     Queue<int> queue(5);
 
-    cout << queue.size() << '\n';
-    cout << queue.isEmpty() << '\n';
+    std::cout << queue.size() << '\n';
+    std::cout << queue.isEmpty() << '\n';
 
     queue.push(1);
     queue.push(2);
@@ -21,16 +18,16 @@ int main() {
 
     queue.push(6);
 
-    cout << queue.front() << '\n';
+    std::cout << queue.front() << '\n';
 
     queue.pop();
     queue.pop();
     queue.pop();
     
-    cout << queue.front() << '\n';
-    cout << queue.size() << '\n';
-    cout << queue.isEmpty() << '\n';
-    cout << queue.pop() << '\n';
-    cout << queue.size() << '\n';
-    cout << queue.isEmpty() << '\n';
+    std::cout << queue.front() << '\n';
+    std::cout << queue.size() << '\n';
+    std::cout << queue.isEmpty() << '\n';
+    std::cout << queue.pop() << '\n';
+    std::cout << queue.size() << '\n';
+    std::cout << queue.isEmpty() << '\n';
 }

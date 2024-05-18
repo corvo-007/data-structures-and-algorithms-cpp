@@ -1,8 +1,6 @@
 #include <iostream>
 #include "../../common/functions.h"
 
-using namespace std;
-
 int partition(int *arr, int start, int end) {
     int pivot = start;
     for (int i = start + 1; i <= end; i++) {
@@ -49,24 +47,24 @@ void quickSort(int *arr, int n) {
 
 int main() {
     int n;
-    cout << "Enter size of the array: ";
-    cin >> n;
+    std::cout << "Enter size of the array: ";
+    std::cin >> n;
     if (n <= 0) {
-        cout << "Size of array cannot be less than 1";
+        std::cout << "Size of array cannot be less than 1";
         return 0;
     }
 
     int *arr = new int[n];
 
-    cout << "Enter " << n << " elements in the array\n";
+    std::cout << "Enter " << n << " elements in the array\n";
     for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+        std::cin >> arr[i];
     }
-    cout << "Before sorting the array: \n";
+    std::cout << "Before sorting the array: \n";
     print_array(arr, n);
 
     quickSort(arr, n);
 
-    cout << "After sorting the array: \n";
+    std::cout << "After sorting the array: \n";
     print_array(arr, n);
 }
