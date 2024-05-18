@@ -51,9 +51,6 @@ class DynamicArray {
         else if (i == nextIndex) {
             add(element);
         }
-        else {
-            return ;
-        }
     }
 
     int get(int i) const {
