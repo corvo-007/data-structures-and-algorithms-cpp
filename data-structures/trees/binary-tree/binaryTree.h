@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include "../../../common/binaryTreeNode.h"
 #include "../../queue/queue-using-LL/queue.h"
 
@@ -166,6 +167,104 @@ std::vector<int>* postOrderVector(BinaryTreeNode<int> *root) {
     }
     ans -> push_back(root -> data);
     return ans;
+}
+
+BinaryTreeNode<int>* constructTreeFromPreorderAndInorder(const std::vector<int> &preorder, int ps, int pe, const std::vector<int> &inorder, int is, int ie) {
+    if (ps > pe || is > ie) {
+        return nullptr;
+    }
+
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(preorder[ps]);
+
+    int i = is;
+    for (; i <= ie; i++) {
+        if (inorder[i] == preorder[ps]) {
+            break;
+        }
+    }
+
+    root -> left = constructTreeFromPreorderAndInorder(preorder, ps + 1, ps + i - is, inorder, is, i - 1);
+    root -> right = constructTreeFromPreorderAndInorder(preorder, ps + i - is + 1, pe, inorder, i + 1, ie);
+
+    return root;
+}
+
+BinaryTreeNode<int>* constructTreeFromPreorderAndInorder(const std::vector<int> &preorder, const std::vector<int> &inorder) {
+    return constructTreeFromPreorderAndInorder(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+}
+
+BinaryTreeNode<int>* constructTreeFromPreorderAndInorder_optimised(const std::vector<int> &preorder, int ps, int pe, const std::vector<int> &inorder, int is, int ie, std::unordered_map<int, int> &positions) {
+    if (ps > pe || is > ie) {
+        return nullptr;
+    }
+
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(preorder[ps]);
+
+    int i = positions[preorder[ps]];
+
+    root -> left = constructTreeFromPreorderAndInorder_optimised(preorder, ps + 1, ps + i - is, inorder, is, i - 1, positions);
+    root -> right = constructTreeFromPreorderAndInorder_optimised(preorder, ps + i - is + 1, pe, inorder, i + 1, ie, positions);
+
+    return root;
+}
+
+BinaryTreeNode<int>* constructTreeFromPreorderAndInorder_optimised(const std::vector<int> &preorder, const std::vector<int> &inorder) {
+    std::unordered_map<int, int> positions;
+
+    for (int i = 0; i < inorder.size(); i++) {
+        positions[inorder[i]] = i;
+    }
+
+    return constructTreeFromPreorderAndInorder_optimised(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1, positions);
+}
+
+BinaryTreeNode<int>* constructTreeFromPostorderAndInorder(const std::vector<int> &postorder, int ps, int pe, const std::vector<int> &inorder, int is, int ie) {
+    if (ps > pe || is > ie) {
+        return nullptr;
+    }
+
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(postorder[pe]);
+
+    int i = ie;
+    for (; i >= is; i--) {
+        if (inorder[i] == postorder[pe]) {
+            break;
+        }
+    }
+
+    root -> left = constructTreeFromPostorderAndInorder(postorder, ps, ps + i - is - 1, inorder, is, i - 1);
+    root -> right = constructTreeFromPostorderAndInorder(postorder, ps + i - is, pe - 1, inorder, i + 1, ie);
+
+    return root;
+}
+
+BinaryTreeNode<int>* constructTreeFromPostorderAndInorder(const std::vector<int> &postorder, const std::vector<int> &inorder) {
+    return constructTreeFromPostorderAndInorder(postorder, 0, postorder.size() - 1, inorder, 0, inorder.size() - 1);
+}
+
+BinaryTreeNode<int>* constructTreeFromPostorderAndInorder_optimised(const std::vector<int> &postorder, int ps, int pe, const std::vector<int> &inorder, int is, int ie, std::unordered_map<int, int> &positions) {
+    if (ps > pe || is > ie) {
+        return nullptr;
+    }
+
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(postorder[pe]);
+
+    int i = positions[postorder[pe]];
+
+    root -> left = constructTreeFromPostorderAndInorder_optimised(postorder, ps, ps + i - is - 1, inorder, is, i - 1, positions);
+    root -> right = constructTreeFromPostorderAndInorder_optimised(postorder, ps + i - is, pe - 1, inorder, i + 1, ie, positions);
+
+    return root;
+}
+
+BinaryTreeNode<int>* constructTreeFromPostorderAndInorder_optimised(const std::vector<int> &postorder, const std::vector<int> &inorder) {
+    std::unordered_map<int, int> positions;
+
+    for (int i = 0; i < inorder.size(); i++) {
+        positions[inorder[i]] = i;
+    }
+
+    return constructTreeFromPostorderAndInorder_optimised(postorder, 0, postorder.size() - 1, inorder, 0, inorder.size() - 1, positions);
 }
 
 BinaryTreeNode<int>* getLCANode(BinaryTreeNode<int>* const root, int d1, int d2) {
