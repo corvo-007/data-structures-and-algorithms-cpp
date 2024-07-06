@@ -29,18 +29,26 @@ namespace Graph {
         }
     };
 
-    std::pair<bool**, int> constructGraph() {
+    template <typename T>
+    T** constructGraph(T value, int n) {
+        T **edges = new T*[n];
+
+        for (int i = 0; i < n; i++) {
+            edges[i] = new T[n];
+
+            for (int j = 0; j < n; j++) {
+                edges[i][j] = value;
+            }
+        }
+
+        return edges;
+    }
+
+    std::pair<bool**, int> inputGraph() {
         int n, e;
         std::cin >> n >> e;
 
-        bool **edges = new bool*[n];
-        for (int i = 0; i < n; i++) {
-            edges[i] = new bool[n];
-
-            for (int j = 0; j < n; j++) {
-                edges[i][j] = false;
-            }
-        }
+        bool **edges = constructGraph(false, n);
 
         for (int i = 0; i < e; i++) {
             int f, s;
@@ -48,6 +56,23 @@ namespace Graph {
 
             edges[f][s] = true;
             edges[s][f] = true;
+        }
+
+        return { edges, n };
+    }
+
+    std::pair<int**, int> inputWeightedGraph() {
+        int n, e;
+        std::cin >> n >> e;
+
+        int **edges = constructGraph(-1, n);
+
+        for (int i = 0; i < e; i++) {
+            int f, s, w;
+            std::cin >> f >> s >> w;
+
+            edges[f][s] = w;
+            edges[s][f] = w;
         }
 
         return { edges, n };
@@ -404,6 +429,52 @@ namespace Graph {
         delete [] parents;
 
         return { mst, n - 1 };
+    }
+
+    int minimumWeightNotVisitedVertex(const std::vector<int> &weights, const std::vector<bool> &visited) {
+        int index = -1;
+
+        for (int i = 0; i < weights.size(); i++) {
+            if (visited[i]) {
+                continue;
+            }
+            if (index == -1 || weights[i] < weights[index]) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    // Prim's algorithm - minimum spanning tree
+    int** minimumSpanningTree(int **edges, int n) {
+        std::vector<bool> visited(n, false);
+        std::vector<int> weights(n, INT_MAX);
+        std::vector<int> parents(n);
+
+        weights[0] = 0;
+        parents[0] = -1;
+
+        for (int i = 0; i < n - 1; i++) {
+            int vertex = minimumWeightNotVisitedVertex(weights, visited);
+
+            visited[vertex] = true;
+
+            for (int i = 0; i < n; i++) {
+                if (i != vertex && edges[vertex][i] != -1 && !visited[i] && edges[vertex][i] < weights[i]) {
+                    weights[i] = edges[vertex][i];
+                    parents[i] = vertex;
+                }
+            }
+        }
+
+        int **mst = constructGraph(-1, n);
+
+        for (int i = 1; i < weights.size(); i++) {
+            mst[i][parents[i]] = weights[i];
+            mst[parents[i]][i] = weights[i];
+        }
+
+        return mst;
     }
 
     void destructGraph(bool **edges, int n) {
