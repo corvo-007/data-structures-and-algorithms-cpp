@@ -1,9 +1,34 @@
 #include <iostream>
+#include <algorithm>
 #include <queue>
 #include <unordered_map>
 #include "../../common/functions.h"
 
 namespace Graph {
+
+    class Edge {
+    public:
+        int source;
+        int dest;
+        int weight;
+
+        Edge() {
+
+        }
+
+        Edge(int source, int dest): source(source), dest(dest), weight(0) {
+
+        }
+
+        Edge(int source, int dest, int weight): source(source), dest(dest), weight(weight) {
+
+        }
+
+        static bool compare(const Edge &e1, const Edge &e2) {
+            return e1.weight < e2.weight;
+        }
+    };
+
     std::pair<bool**, int> constructGraph() {
         int n, e;
         std::cin >> n >> e;
@@ -26,6 +51,26 @@ namespace Graph {
         }
 
         return { edges, n };
+    }
+
+    std::pair<Edge*, std::pair<int, int>> inputEdges() {
+        int n, e;
+
+        std::cin >> n >> e;
+
+        Edge *edges = new Edge[e];
+
+        for (int i = 0; i < e; i++) {
+            int source, dest, weight;
+
+            std::cin >> source >> dest >> weight;
+
+            edges[i].source = source;
+            edges[i].dest = dest;
+            edges[i].weight = weight;
+        }
+
+        return { edges, { n, e } };
     }
 
     void DFS(bool **edges, int n, int sv, bool *visited) {
@@ -315,11 +360,61 @@ namespace Graph {
         return components;
     }
 
+    int findParent(int *parents, int vertex) {
+        while (parents[vertex] != vertex) {
+            vertex = parents[vertex];
+        }
+        return vertex;
+    }
+
+    // Kruskal's algorithm - minimum spanning tree with union find
+    std::pair<Edge*, int> minimumSpanningTree(Edge *edges, int n, int e) {
+        std::sort(edges, edges + e, Edge::compare);
+
+        Edge *mst = new Edge[n - 1];
+
+        int *parents = new int[n];
+        for (int i = 0; i < n; i++) {
+            parents[i] = i;
+        }
+
+        int verticesCount = 0;
+
+        for (int i = 0; i < e; i++) {
+            int srcParent = findParent(parents, edges[i].source);
+            int destParent = findParent(parents, edges[i].dest);
+
+            if (srcParent == destParent) {
+                continue;
+            }
+
+            parents[destParent] = srcParent;
+
+            mst[verticesCount].source = edges[i].source;
+            mst[verticesCount].dest = edges[i].dest;
+            mst[verticesCount].weight = edges[i].weight;
+
+            verticesCount++;
+
+            if (verticesCount == n - 1) {
+                break;
+            }
+        }
+
+        delete [] parents;
+
+        return { mst, n - 1 };
+    }
+
     void destructGraph(bool **edges, int n) {
         for (int i = 0; i < n; i++) {
             delete [] edges[i];
         }
 
+        delete [] edges;
+    }
+
+    void destructEdges(Edge *edges) {
         delete [] edges;
     }
 }
