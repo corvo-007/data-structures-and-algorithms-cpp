@@ -477,6 +477,30 @@ namespace Graph {
         return mst;
     }
 
+    std::vector<int> shortestPath(int **edges, int n, int source) {
+        std::vector<bool> visited(n, false);
+        std::vector<int> dist(n, INT_MAX);
+
+        dist[source] = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            int vertex = minimumWeightNotVisitedVertex(dist, visited);
+
+            visited[vertex] = true;
+
+            for (int i = 0; i < n; i++) {
+                if (i != vertex && edges[vertex][i] != -1 && !visited[i]) {
+                    int d = dist[vertex] + edges[vertex][i];
+                    if (d < dist[i]) {
+                        dist[i] = d;
+                    }
+                }
+            }
+        }
+
+        return dist;
+    }
+
     void destructGraph(bool **edges, int n) {
         for (int i = 0; i < n; i++) {
             delete [] edges[i];
