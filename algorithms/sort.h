@@ -1,3 +1,5 @@
+#include <utility>
+
 namespace Sort {
 
     void selectionSort(int *arr, int n) {
@@ -137,9 +139,7 @@ namespace Sort {
             int parent = (child - 1) / 2;
 
             while (parent >= 0 && arr[parent] > arr[child]) {
-                arr[parent] ^= arr[child];
-                arr[child] ^= arr[parent];
-                arr[parent] ^= arr[child];
+                std::swap(arr[parent], arr[child]);
 
                 child = parent;
                 parent = (child - 1) / 2;
@@ -149,11 +149,9 @@ namespace Sort {
         int size = n;
 
         while (size > 1) {
-            arr[0] ^= arr[size - 1];
-            arr[size - 1] ^= arr[0];
-            arr[0] ^= arr[size - 1];
+            std::swap(arr[0], arr[size - 1]);
 
-            size --;
+            size--;
 
             int parent = 0;
             int left = 1;
@@ -162,9 +160,7 @@ namespace Sort {
             while (right < size && (arr[parent] > arr[left] || arr[parent] > arr[right])) {
                 int index = (arr[left] < arr[right]) ? left : right;
 
-                arr[parent] ^= arr[index];
-                arr[index] ^= arr[parent];
-                arr[parent] ^= arr[index];
+                std::swap(arr[parent], arr[index]);
 
                 parent = index;
                 left = (2 * parent) + 1;
@@ -172,9 +168,7 @@ namespace Sort {
             }
 
             if (left < size && arr[parent] > arr[left]) {
-                arr[parent] ^= arr[left];
-                arr[left] ^= arr[parent];
-                arr[parent] ^= arr[left];
+                std::swap(arr[parent], arr[left]);
             }
         }
     }
