@@ -1,51 +1,40 @@
 #include <iostream>
-// #include "../../common/node.h"
+#include "../../common/node.h"
 
-class Node {
-    public:
-    int data;
-    Node *next;
-
-    Node(int data) {
-        this -> data = data;
-        next = nullptr;
-    }
-};
-
-Node* takeInput() {
-    Node *head = nullptr;
+Node<int>* takeInput() {
+    Node<int> *head = nullptr;
     int data;
     std::cout << "Enter the elements in Linked List (Enter -1 to stop):\n";
     std::cin >> data;
     while (data != -1) {
         if (head == nullptr) {
-            head = new Node(data);
+            head = new Node<int>(data);
         }
         else {
-            Node *temp = head;
+            Node<int> *temp = head;
             while (temp -> next != nullptr) {
                 temp = temp -> next;
             }
-            temp -> next = new Node(data);
+            temp -> next = new Node<int>(data);
         }
         std::cin >> data;
     }
     return head;
 }
 
-Node* takeInput_better() {
-    Node *head = nullptr, *tail = nullptr;
+Node<int>* takeInput_better() {
+    Node<int> *head = nullptr, *tail = nullptr;
     int data;
     std::cout << "Enter the elements in Linked List (Enter -1 to stop):\n";
     std::cin >> data;
 
     while (data != -1) {
         if (head == nullptr) {
-            head = new Node(data);
+            head = new Node<int>(data);
             tail = head;
         }
         else {
-            tail -> next = new Node(data);
+            tail -> next = new Node<int>(data);
             tail = tail -> next;
         }
         std::cin >> data;
@@ -53,16 +42,16 @@ Node* takeInput_better() {
     return head;
 }
 
-Node* insertNode(Node *head, int i, int data) {
+Node<int>* insertNode(Node<int> *head, int i, int data) {
     if (head == nullptr) {
         return head;
     }
     if (i == 0) {
-        Node *newNode = new Node(data);
+        Node<int> *newNode = new Node<int>(data);
         newNode -> next = head;
         return newNode;
     }
-    Node *temp = head;
+    Node<int> *temp = head;
     int count = 0;
     while (temp != nullptr && count < i - 1) {
         temp = temp -> next;
@@ -71,23 +60,23 @@ Node* insertNode(Node *head, int i, int data) {
     if (temp == nullptr) {
         return head;
     }
-    Node *newNode = new Node(data);
+    Node<int> *newNode = new Node<int>(data);
     newNode -> next = temp -> next;
     temp -> next = newNode;
     return head;
 }
 
-Node* deleteNode(Node *head, int index) {
+Node<int>* deleteNode(Node<int> *head, int index) {
     if (head == nullptr) {
         return nullptr;
     }
     if (index == 0) {
-        Node *newHead = head -> next;
+        Node<int> *newHead = head -> next;
         delete head;
         return newHead;
     }
     int count = 0;
-    Node *temp = head;
+    Node<int> *temp = head;
     while (temp != nullptr && count < index - 1) {
         count++;
         temp = temp -> next;
@@ -95,13 +84,13 @@ Node* deleteNode(Node *head, int index) {
     if (temp == nullptr || temp -> next == nullptr) {
         return head;
     }
-    Node *delNode = temp -> next;
+    Node<int> *delNode = temp -> next;
     temp -> next = delNode -> next;
     delete delNode;
     return head;
 }
 
-void printLL(Node *head) {
+void printLL(Node<int> *head) {
     while (head != nullptr) {
         std::cout << head -> data << ' ';
         head = head -> next;
