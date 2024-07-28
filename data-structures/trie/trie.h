@@ -4,6 +4,12 @@
 class Trie {
     TrieNode *root;
 
+public:
+    Trie() {
+        root = new TrieNode('\0');
+    }
+
+private:
     void insertWordRecursive(TrieNode *root, const std::string word) {
         if (word.length() == 0) {
             root -> isTerminal = true;
@@ -85,12 +91,8 @@ class Trie {
     void removeWordRecursive_optimised(TrieNode *root, const std::string &word, int index) {
 
     }
-    
-    public:
-    Trie() {
-        root = new TrieNode('\0');
-    }
 
+public:
     void insertWordRecursive(const std::string word) {
         insertWordRecursive(root, word);
     }
