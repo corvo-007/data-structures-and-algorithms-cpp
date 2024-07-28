@@ -1,3 +1,5 @@
+#pragma once
+
 template <typename T>
 class D_Node {
 public:
