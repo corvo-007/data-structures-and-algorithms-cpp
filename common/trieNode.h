@@ -1,3 +1,5 @@
+#pragma once
+
 class TrieNode {
     public:
     char data;
