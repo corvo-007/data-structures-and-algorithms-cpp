@@ -62,10 +62,8 @@ namespace DP {
             int root_i = sqrt(i);
 
             for (int j = 1; j <= root_i; j++) {
-                dp[i] = std::min(dp[i], dp[i - j * j]);
+                dp[i] = std::min(dp[i], dp[i - j * j] + 1);
             }
-
-            dp[i]++;
         }
 
         int output = dp[n];
