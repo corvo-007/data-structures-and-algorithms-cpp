@@ -77,9 +77,7 @@ namespace DP {
 
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1]));
-                dp[i][j] += matrix[i - 1][j - 1];
-
+                dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1])) + matrix[i - 1][j - 1];
             }
         }
 
