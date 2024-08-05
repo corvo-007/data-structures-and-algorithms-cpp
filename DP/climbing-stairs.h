@@ -1,3 +1,5 @@
+#include <algorithm>
+
 namespace DP {
 
 	int climbingStairs_brute_force(int n) {
