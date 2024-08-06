@@ -39,6 +39,9 @@ namespace DP {
 	}
 
 	int hosueRobber_bottom_up(const std::vector<int> &vec) {
+		if (vec.size() == 0) {
+			return 0;
+		}
 		if (vec.size() == 1) {
 			return vec[0];
 		}
