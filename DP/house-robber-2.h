@@ -22,7 +22,7 @@ namespace DP {
 			two = temp;
 		}
 
-		return std::max(one, two);
+		return two;
 	}
 
 	int houseRobber2(std::vector<int> &vec) {
