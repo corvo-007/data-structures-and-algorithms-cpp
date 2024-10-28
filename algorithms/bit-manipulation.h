@@ -81,4 +81,24 @@ namespace BIT {
 		}
 		return a;
 	}
+
+	std::vector<std::vector<int>> subsets_bit_manipulation(const std::vector<int> &vec) {
+        std::vector<std::vector<int>> output;
+
+        const int n = vec.size();
+        const int totalSubsets = 1 << n;
+
+        for (int mask = 0; mask < totalSubsets; mask++) {
+            std::vector<int> subset;
+
+            for (int i = 0; i < n; i++) {
+                if (mask & (1 << i)) {
+                    subset.push_back(vec[i]);
+                }
+            }
+            output.push_back(subset);
+        }
+
+        return output;
+    }
 }
