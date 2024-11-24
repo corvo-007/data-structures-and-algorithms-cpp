@@ -70,4 +70,48 @@ namespace Graph {
 
         return 0;
     }
+
+    int ladderLength_optimised(std::string beginWord, std::string endWord, std::vector<std::string> &wordList) {
+        std::unordered_set<std::string> words(wordList.begin(), wordList.end());
+
+        std::queue<std::string> queue;
+        queue.push(beginWord);
+        queue.push("");
+
+        int length = 1;
+
+        while (!queue.empty()) {
+            std::string front = queue.front();
+            queue.pop();
+
+            if (front.empty()) {
+                length++;
+
+                if (!queue.empty()) {
+                    queue.push("");
+                }
+            }
+
+            if (front == endWord) {
+                return length;
+            }
+
+            for (int i = 0; i < front.length(); i++) {
+
+                char temp = front[i];
+
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                    front[i] = ch;
+
+                    if (words.count(front)) {
+                        queue.push(front);
+                        words.erase(front);
+                    }
+                }
+                front[i] = temp;
+            }
+        }
+
+        return 0;
+    }
 }
