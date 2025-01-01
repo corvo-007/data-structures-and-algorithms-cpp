@@ -17,12 +17,12 @@ namespace Intervals {
         return res;
     }
 
-    int eraseOverlapIntervals(const std::vector<std::vector<int>> &intervals) {
+    int eraseOverlapIntervals(std::vector<std::vector<int>> &intervals) {
         std::sort(intervals.begin(), intervals.end());
         return intervals.size() - recursion(intervals, 0, INT_MIN);
     }
 
-    int eraseOverlapIntervals_optimised(const std::vector<std::vector<int>> &intervals) {
+    int eraseOverlapIntervals_optimised(std::vector<std::vector<int>> &intervals) {
         if (intervals.size() <= 1) {
             return 0;
         }
