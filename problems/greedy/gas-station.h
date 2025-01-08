@@ -1,4 +1,5 @@
 #include <vector>
+#include <numeric>
 
 namespace Greedy {
     int canCompleteCircuit_brute_force(const std::vector<int> &gas, const std::vector<int> &cost) {
@@ -26,5 +27,26 @@ namespace Greedy {
             }
         }
         return -1;
+    }
+
+    int canCompleteCircuit(const std::vector<int> &gas, const std::vector<int> &cost) {
+        int totalGas = std::accumulate(gas.begin(), gas.end(), 0);
+        int totalCost = std::accumulate(cost.begin(), cost.end(), 0);
+
+        if (totalGas < totalCost) {
+            return -1;
+        }
+
+        int index = 0, tank = 0;
+
+        for (int i = 0; i < gas.size(); i++) {
+            tank += (gas[i] - cost[i]);
+
+            if (tank < 0) {
+                tank = 0;
+                index = i + 1;
+            }
+        }
+        return index;
     }
 }
