@@ -29,6 +29,25 @@ namespace Greedy {
         return -1;
     }
 
+    int canCompleteCircuit_two_pointer(const std::vector<int> &gas, const std::vector<int> &cost) {
+        int start = gas.size() - 1, end = 0;
+
+        int tank = gas[start] - cost[start];
+
+        while (start > end) {
+            if (tank < 0) {
+                start--;
+                tank += gas[start] - cost[start];
+            }
+            else {
+                tank += gas[end] - cost[end];
+                end++;
+            }
+        }
+
+        return (tank >= 0) ? start : -1;
+    }
+
     int canCompleteCircuit(const std::vector<int> &gas, const std::vector<int> &cost) {
         int totalGas = std::accumulate(gas.begin(), gas.end(), 0);
         int totalCost = std::accumulate(cost.begin(), cost.end(), 0);
