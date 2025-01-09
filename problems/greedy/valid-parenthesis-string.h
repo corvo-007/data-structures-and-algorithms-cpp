@@ -25,4 +25,31 @@ namespace Greedy {
     bool checkValidString_recursion(const std::string &s) {
         return checkValidString_recursion(s, 0, 0);
     }
+
+    bool checkValidString(const std::string &s) {
+        int min = 0, max = 0;
+
+        for (const char &c : s) {
+            if (c == '(') {
+                min++;
+                max++;
+            }
+            else if (c == ')') {
+                min--;
+                max--;
+            }
+            else {
+                min--;
+                max++;
+            }
+
+            if (max < 0) {
+                return false;
+            }
+            if (min < 0) {
+                min = 0;
+            }
+        }
+        return min == 0;
+    }
 }
