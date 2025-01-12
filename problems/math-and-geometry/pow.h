@@ -55,4 +55,22 @@ namespace MathAndGeometry {
     double pow_recursive_optimised(double x, int n) {
         return pow_recursive_optimised(x, (long long) n);
     }
+
+    double pow_recursive_tail(double x, long long n, double acc) {
+        if (x == 0) {
+            return 0;
+        }
+        if (n == 0 || x == 1) {
+            return acc;
+        }
+        if (n < 0) {
+            return 1 / pow_recursive_tail(x, std::abs(n), acc);
+        }
+
+        return pow_recursive_tail(x * x, n >> 1, (n & 1) ? acc * x : acc);
+    }
+
+    double pow_recursive_tail(double x, int n) {
+        return pow_recursive_tail(x, (long long) n, 1);
+    }
 }
