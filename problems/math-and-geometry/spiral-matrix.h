@@ -41,4 +41,50 @@ namespace MathAndGeometry {
 
         return output;
     }
+
+    std::vector<int> spiralOrder2(const std::vector<std::vector<int>> &matrix) {
+        std::vector<int> output;
+
+        int minrow = 0, mincol = 0, maxrow = matrix.size() - 1, maxcol = matrix[0].size() - 1;
+
+        while (mincol <= maxcol) {
+            for (int i = mincol; i <= maxcol; i++) {
+                output.push_back(matrix[minrow][i]);
+            }
+
+            minrow++;
+
+            if (minrow > maxrow) {
+                break;
+            }
+
+            for (int i = minrow; i <= maxrow; i++) {
+                output.push_back(matrix[i][maxcol]);
+            }
+
+            maxcol--;
+
+            if (maxcol < mincol) {
+                break;
+            }
+
+            for (int i = maxcol; i >= mincol; i--) {
+                output.push_back(matrix[maxrow][i]);
+            }
+
+            maxrow--;
+
+            if (maxrow < minrow) {
+                break;
+            }
+
+            for (int i = maxrow; i >= minrow; i--) {
+                output.push_back(matrix[i][mincol]);
+            }
+
+            mincol++;
+        }
+
+        return output;
+    }
 }
