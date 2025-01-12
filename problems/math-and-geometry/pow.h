@@ -73,4 +73,26 @@ namespace MathAndGeometry {
     double pow_recursive_tail(double x, int n) {
         return pow_recursive_tail(x, (long long) n, 1);
     }
+
+    double pow_iterative_optimised(double x, int n) {
+        if (x == 0 || x == 1 || n == 1) {
+            return x;
+        }
+        if (n == 0) {
+            return 1;
+        }
+
+        double res = 1;
+        long long abs_n = std::abs((long long) n);
+
+        while (abs_n) {
+            if (abs_n & 1) {
+                res *= x;
+            }
+            x *= x;
+            abs_n >>= 1;
+        }
+
+        return (n > 0) ? res : 1 / res;
+    }
 }
