@@ -61,4 +61,38 @@ namespace MathAndGeometry {
 
         return sum;
     }
+
+    std::string multiply_optimised(std::string num1, std::string num2) {
+        if (num1 == "0" || num2 == "0") {
+            return "0";
+        }
+
+        std::vector<int> sum(num1.size() + num2.size(), 0);
+
+        for (int i = num1.size() - 1; i >= 0; i--) {
+            int n = num1[i] - '0';
+            int carry = 0;
+            for (int j = num2.size() - 1; j >= 0; j--) {
+                int s = sum[i + j + 1] + n * (num2[j] - '0');
+                sum[i + j + 1] = s % 10;
+                
+                int c = sum[i + j] + s / 10 + carry;
+                sum[i + j] = c % 10;
+                carry = c / 10;
+            }
+        }
+
+        std::string output;
+        bool leading = true;
+
+        for (int i = 0; i < sum.size(); i++) {
+            if (leading && sum[i] == 0) {
+                continue;
+            }
+            leading = false;
+            output.push_back(sum[i] + '0');
+        }
+
+        return output;
+    }
 }
