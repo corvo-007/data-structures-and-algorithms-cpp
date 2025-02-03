@@ -6,6 +6,7 @@ namespace AdvancedGraphs {
         return std::abs(p1[0] - p2[0]) + std::abs(p1[1] - p2[1]);
     }
 
+    // prim's algorithm
     int minCostConnectPoints(const std::vector<std::vector<int>> &points) {
         std::vector<bool> visited(points.size(), false);
         std::vector<int> weights(points.size(), INT_MAX);
@@ -37,6 +38,41 @@ namespace AdvancedGraphs {
                     }
                 }
             }
+        }
+
+        return cost;
+    }
+
+    // prim's algorithm
+    int minCostConnectPoints_optimised(const std::vector<std::vector<int>> &points) {
+        std::vector<bool> visited(points.size(), false);
+        std::vector<int> weights(points.size(), INT_MAX);
+
+        int cost = 0;
+        int edges = 0;
+        int node = 0;
+
+        while (edges < points.size() - 1) {
+            visited[node] = true;
+
+            int next_node = -1;
+
+            for (int i = 0; i < points.size(); i++) {
+                if (visited[i]) {
+                    continue;
+                }
+
+                int dist = manhattanDistance(points[node], points[i]);
+                weights[i] = std::min(weights[i], dist);
+
+                if (next_node == -1 || weights[i] < weights[next_node]) {
+                    next_node = i;
+                }
+            }
+
+            cost += weights[next_node];
+            node = next_node;
+            edges++;
         }
 
         return cost;
