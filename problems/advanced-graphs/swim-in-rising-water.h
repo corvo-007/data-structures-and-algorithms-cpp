@@ -1,6 +1,7 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include "../../data-structures/disjoint-set/disjointSet.h"
 
 namespace AdvancedGraphs {
     int maxInGrid(const std::vector<std::vector<int>> &grid) {
@@ -84,6 +85,41 @@ namespace AdvancedGraphs {
 
                 pq.push({ std::max(min_t, grid[ni][nj]), { ni, nj }});
                 visited[ni][nj] = true;
+            }
+        }
+
+        return -1;
+    }
+
+    int swimInWater_kruskal(const std::vector<std::vector<int>> &grid) {
+        std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, std::greater<std::pair<int, std::pair<int, int>>>> pq;
+
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid.size(); j++) {
+                pq.push({ grid[i][j], { i, j }});
+            }
+        }
+
+        const std::vector<std::pair<int, int>> directions = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
+
+        DisjointSet disjointSet(grid.size() * grid.size());
+
+        while (!pq.empty()) {
+            auto [ t, ij_pair ] = pq.top();
+            pq.pop();
+
+            for (auto &[ di, dj ] : directions) {
+                int ni = ij_pair.first + di, nj = ij_pair.second + dj;
+
+                if (ni == -1 || ni == grid.size() || nj == -1 || nj == grid.size() || grid[ni][nj] > t) {
+                    continue;
+                }
+
+                disjointSet.unionByRank(ij_pair.first * grid.size() + ij_pair.second, ni * grid.size() + nj);
+            }
+
+            if (disjointSet.findParent(0) == disjointSet.findParent(grid.size() * grid.size() - 1)) {
+                return t;
             }
         }
 
