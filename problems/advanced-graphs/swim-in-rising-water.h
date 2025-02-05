@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 namespace AdvancedGraphs {
     int maxInGrid(const std::vector<std::vector<int>> &grid) {
@@ -11,7 +12,7 @@ namespace AdvancedGraphs {
     }
 
     bool dfs(const std::vector<std::vector<int>> &grid, int i, int j, int &t, std::vector<std::vector<bool>> &output) {
-        if (i == -1 || i == grid.size() || j == -1 || j == grid[0].size() || !output[i][j]) {
+        if (i == -1 || i == grid.size() || j == -1 || j == grid.size() || !output[i][j]) {
             return false;
         }
 
@@ -20,7 +21,7 @@ namespace AdvancedGraphs {
             return false;
         }
 
-        if (i == grid.size() - 1 && j == grid[0].size() - 1) {
+        if (i == grid.size() - 1 && i == j) {
             return true;
         }
 
@@ -30,7 +31,7 @@ namespace AdvancedGraphs {
     }
 
     bool checkPath(const std::vector<std::vector<int>> &grid, int t) {
-        std::vector<std::vector<bool>> output(grid.size(), std::vector(grid[0].size(), true));
+        std::vector<std::vector<bool>> output(grid.size(), std::vector(grid.size(), true));
         return dfs(grid, 0, 0, t, output);
     }
 
@@ -52,5 +53,40 @@ namespace AdvancedGraphs {
         }
 
         return t;
+    }
+
+    int swimInWater_dijkstra(const std::vector<std::vector<int>> &grid) {
+        std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid.size(), false));
+
+        std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, std::greater<std::pair<int, std::pair<int, int>>>> pq;
+
+        const std::vector<std::pair<int, int>> directions = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
+
+        pq.push({ grid[0][0], { 0, 0 }});
+        visited[0][0] = true;
+
+        while (!pq.empty()) {
+            auto [ min_t, ij_pair ] = pq.top();
+            pq.pop();
+
+            auto &[ i, j ] = ij_pair;
+
+            if (i == grid.size() - 1 && i == j) {
+                return min_t;
+            }
+
+            for (auto &[ di, dj ] : directions) {
+                int ni = i + di, nj = j + dj;
+
+                if (ni == -1 || ni == grid.size() || nj == -1 || nj == grid.size() || visited[ni][nj]) {
+                    continue;
+                }
+
+                pq.push({ std::max(min_t, grid[ni][nj]), { ni, nj }});
+                visited[ni][nj] = true;
+            }
+        }
+
+        return -1;
     }
 }
