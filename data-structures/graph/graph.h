@@ -501,6 +501,33 @@ namespace Graph {
         return dist;
     }
 
+    // only works for DAG (Directed Acyclic Graph)
+    void topologicalSort(const bool * const * const edges, int n, int vertex, std::vector<int> &visited, std::vector<int> &output) {
+        visited[vertex] = true;
+
+        for (int i = 0; i < n; i++) {
+            if (edges[vertex][i] && !visited[i]) {
+                topologicalSort(edges, n, i, visited, output);
+            }
+        }
+
+        output.push_back(vertex);
+    }
+
+    std::vector<int> topologicalSort(bool **edges, int n) {
+        std::vector<int> output;
+        std::vector<int> visited(n, false);
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                topologicalSort(edges, n, i, visited, output);
+            }
+        }
+
+        std::reverse(output.begin(), output.end());
+        return output;
+    }
+
     void destructGraph(bool **edges, int n) {
         for (int i = 0; i < n; i++) {
             delete [] edges[i];
