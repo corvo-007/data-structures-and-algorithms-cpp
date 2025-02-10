@@ -528,6 +528,44 @@ namespace Graph {
         return output;
     }
 
+    // kahn's algorithm
+    std::vector<int> topologicalSort(const std::vector<std::vector<int>> &adjList, int n) {
+        std::vector<int> indegree(n, 0);
+
+        for (auto &vec : adjList) {
+            for (const int &i : vec) {
+                indegree[i]++;
+            }
+        }
+
+        std::queue<int> queue;
+
+        for (int i = 0; i < n; i++) {
+            if (indegree[i] == 0) {
+                queue.push(i);
+            }
+        }
+
+        std::vector<int> output;
+
+        while (!queue.empty()) {
+            int front = queue.front();
+            queue.pop();
+
+            output.push_back(front);
+
+            for (const int &i : adjList[front]) {
+                indegree[i]--;
+
+                if (indegree[i] == 0) {
+                    queue.push(i);
+                }
+            }
+        }
+
+        return output;
+    }
+
     void destructGraph(bool **edges, int n) {
         for (int i = 0; i < n; i++) {
             delete [] edges[i];
