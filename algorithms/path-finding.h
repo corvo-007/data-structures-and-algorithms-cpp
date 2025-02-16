@@ -29,4 +29,26 @@ namespace PathFinding {
 
         return dist;
     }
+
+    std::vector<int> bellmanFord(int v, const std::unordered_map<int, std::vector<std::pair<int, int>>> &adjList, int src) {
+        std::vector<int> dist(v, INT_MAX);
+
+        dist[src] = 0;
+
+        for (int i = 0; i < v; i++) {
+            for (auto &[ s, adj_pair ] : adjList) {
+                for (auto &[ d, w ] : adj_pair) {
+                    if (dist[s] != INT_MAX && dist[s] + w < dist[d]) {
+                        if (i == v - 1) {
+                            return { -1 };
+                        }
+
+                        dist[d] = dist[s] + w;
+                    }
+                }
+            }
+        }
+
+        return dist;
+    }
 }
