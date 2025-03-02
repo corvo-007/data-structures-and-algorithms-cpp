@@ -1,6 +1,7 @@
 #include <vector>
 #include <unordered_map>
 #include <queue>
+#include "../common/functions.h"
 
 namespace PathFinding {
     std::vector<int> dijkstra(int v, const std::unordered_map<int, std::vector<std::pair<int, int>>> &adjList, int src) {
@@ -44,6 +45,24 @@ namespace PathFinding {
                         }
 
                         dist[d] = dist[s] + w;
+                    }
+                }
+            }
+        }
+
+        return dist;
+    }
+
+    std::vector<std::vector<int>> floydWarshall(const std::vector<std::vector<int>> &graph) {
+        int v = graph.size();
+        std::vector<std::vector<int>> dist(v, std::vector<int>(v));
+        copyMatrix(graph, dist);
+
+        for (int k = 0; k < v; k++) {
+            for (int i = 0; i < v; i++) {
+                for (int j = 0; j < v; j++) {
+                    if ((dist[i][k] != INT_MAX && dist[k][j] != INT_MAX) && dist[i][k] + dist[k][j] < dist[i][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
                     }
                 }
             }

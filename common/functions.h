@@ -25,3 +25,12 @@ std::unordered_map<char, int> frequencyCount(const std::string &str) {
 	}
 	return map;
 }
+
+template <typename T>
+void copyMatrix(const std::vector<std::vector<T>> &src, std::vector<std::vector<T>> &dest) {
+    for (int i = 0; i < src.size(); i++) {
+        for (int j = 0; j < src[0].size(); j++) {
+            dest[i][j] = src[i][j];
+        }
+    }
+}
