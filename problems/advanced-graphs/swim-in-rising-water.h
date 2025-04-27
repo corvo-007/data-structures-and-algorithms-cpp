@@ -1,6 +1,7 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <climits>
 #include "../../data-structures/disjoint-set/disjointSet.h"
 
 namespace AdvancedGraphs {

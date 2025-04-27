@@ -1,4 +1,5 @@
 #include <vector>
+#include <climits>
 
 namespace AdvancedGraphs {
     int findCheapestPrice(int n, const std::vector<std::vector<int>> &flights, int src, int dest, int k) {

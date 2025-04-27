@@ -1,4 +1,5 @@
 #include <vector>
+#include <climits>
 
 namespace Greedy {
     int jump_recursion(const std::vector<int> &vec, int index) {

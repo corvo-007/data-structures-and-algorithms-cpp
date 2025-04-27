@@ -1,4 +1,6 @@
 #include <vector>
+#include <climits>
+#include <cstdint>
 
 namespace RangeDS {
 

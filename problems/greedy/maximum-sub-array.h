@@ -1,4 +1,5 @@
 #include <vector>
+#include <climits>
 
 namespace Greedy {
     int maxSubArray(const std::vector<int> &vec) {

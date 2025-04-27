@@ -1,5 +1,6 @@
 #include <string>
 #include <algorithm>
+#include <vector>
 
 namespace MathAndGeometry {
     std::string add(std::string s1, std::string s2, int skipCount) {

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <queue>
 #include <unordered_map>
+#include <climits>
 #include "../../common/functions.h"
 
 namespace Graph {

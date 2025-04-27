@@ -1,6 +1,7 @@
 #include <vector>
 #include <unordered_set>
 #include <queue>
+#include <climits>
 
 namespace Graph {
     int bfs(const std::vector<std::vector<int>> &grid, int row, int col) {

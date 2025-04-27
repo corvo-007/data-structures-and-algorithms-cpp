@@ -1,5 +1,7 @@
 #include <vector>
 #include <queue>
+#include <climits>
+#include <cstdlib>
 
 namespace AdvancedGraphs {
     int manhattanDistance(const std::vector<int> &p1, const std::vector<int> &p2) {

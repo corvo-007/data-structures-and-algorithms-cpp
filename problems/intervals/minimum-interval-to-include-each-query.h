@@ -2,6 +2,7 @@
 #include <queue>
 #include <unordered_map>
 #include <vector>
+#include <climits>
 
 namespace Intervals {
     std::vector<int> minInterval_brute_force(std::vector<std::vector<int>> &intervals, std::vector<int> &queries) {

@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <climits>
 #include "../common/node.h"
 
 namespace Algo {

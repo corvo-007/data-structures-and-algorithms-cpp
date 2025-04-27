@@ -32,7 +32,7 @@ namespace MathAndGeometry {
         return false;
     }
 
-    bool isHappy(int n) {
+    bool isHappy2(int n) {
         if (n == 1) {
             return true;
         }
